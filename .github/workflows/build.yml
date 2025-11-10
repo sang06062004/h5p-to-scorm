@@ -4,10 +4,13 @@ on:
   push:
     paths:
       - 'input.h5p'
+      - '.github/workflows/build.yml'
+      - 'package.json'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,8 +23,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run SCORM export
-        run: npm run build
+      - name: Install H5P CLI globally
+        run: npm install -g @lumieducation/h5p-cli
+
+      - name: Debug - List files and environment
+        run: |
+          echo "📂 Listing files..."
+          ls -R
+          echo "🧩 Node and npm versions:"
+          node -v
+          npm -v
+
+      - name: Run SCORM export (with debug)
+        run: |
+          echo "🚀 Starting H5P export..."
+          npx h5p export --input input.h5p --output output.zip --format scorm12 || echo "❌ Export failed with exit code $?"
+
+      - name: Verify output
+        run: |
+          echo "🧾 Checking output..."
+          ls -lh output.zip || echo "⚠️ output.zip not found!"
 
       - name: Upload SCORM package
         uses: actions/upload-artifact@v4
