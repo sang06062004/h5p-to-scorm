@@ -34,4 +34,4 @@ Aktuell wird **SCORM 1.2** verwendet. Du kannst dies in der Datei `package.json`
 
 - [Lumi Education CLI](https://githubs]## 📄 Lizenz
 
-MIT License – frei zur Nutzung, Anpassung und Weitergabe.
+#MIT License – frei zur Nutzung, Anpassung und Weitergabe.
