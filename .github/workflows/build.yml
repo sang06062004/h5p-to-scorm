@@ -2,8 +2,7 @@ name: Export H5P to SCORM
 
 on:
   push:
-    paths:
-      - 'input.h5p'
+    branches: [ main ]
 
 jobs:
   build:
